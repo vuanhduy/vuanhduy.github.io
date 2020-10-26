@@ -1,23 +1,17 @@
 ---
 layout: post
-title:  "Welcome to Jekyll!"
-date:   2020-06-29 10:56:33 -0400
+title:  "C++ smart pointers"
+date:   2020-10-24 10:56:33 -0400
 categories: [C++, smart pointers]
 ---
-
-# C++ smart pointers
+# Introduction
 
 A **smart pointer** is a class that manages a dynamically allocated object,ensuring the dynamically allocated object is properly cleaned up at the appropriate time (usually when the smart pointer goes out of scope).
 
 C++11 standard library ships with 4 smart pointer classes: `std::auto_ptr` (which you shouldn’t use -- it’s being removed in C++17), `std::unique_ptr` `std::shared_ptr`, and `std::weak_ptr`.
 
-## Background
-### Ownership???
-### Move semantics ??
-Move semantics means the class will transfer ownership of the object rather than making a copy.
-
-## Smart pointer types
-### `std::unique_ptr`
+# Smart pointer types
+## `std::unique_ptr`
 
 The `std::unique_ptr` should be used to manage a single dynamically-allocated object. That is, there must be only a single pointer pointing to the dynamically-allocated object. Internally, as the `std::unique_ptr` variable is allocated on the stack, it’s guaranteed to eventually go out of scope, and when it does, the system will delete the heap-allocated content that the variable is managing.
 
@@ -90,7 +84,7 @@ void pass_by_reference(MyClass *my_object) {
 }
 ```
 
-### `std::shared_ptr`
+## `std::shared_ptr`
 
 `std::shared_ptr` is a means to solve the case where you need multiple smart pointers co-owning a resource. Internally, `std::shared_ptr` keeps track of how many `std::shared_ptr` are sharing the resource. As long as at least one `std::shared_ptr` is pointing to the resource, the resource will not be deallocated, even if individual `std::shared_ptr` are destroyed. As soon as the last `std::shared_ptr` managing the resource goes out of scope (or is reassigned to point at something else), the resource will be deallocated (see Example 7.)
 
@@ -137,7 +131,7 @@ int main(int argc, const char * argv[]) {
 }
 ```
 
-### `std::weak_ptr`
+## `std::weak_ptr`
 
 `std::weak_ptr` is designed to solve the **circular dependency issue** (see [here](#markdown-header-the-circular-dependency-issue) for the details). A `std::weak_ptr` works as an observer, which can observe and access the same object as a `std::shared_ptr` (or other `std::weak_ptrs`) but is not considered an owner. Recall that when a `std::shared_ptr` goes out of scope,it only considers whether other `std::shared_ptr` are co-owning the object (`std::weak_ptr` does not count!)
 
