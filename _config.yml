@@ -31,5 +31,10 @@ exclude:
 
 remote_theme: ngzhio/jekyll-theme-hamilton
 
+<<<<<<< HEAD
 logo: logo.png
 paginate: 10
+=======
+logo: logo.jpg
+skine: Sunset
+>>>>>>> 00f27ce03d7a91bb74f3cd77c62ce15c732edb6c
