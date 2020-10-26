@@ -14,7 +14,7 @@ description: > # this means to ignore newlines until "baseurl:"
   Google search results) and in your feed.xml site description.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://vuanhduy.github.io" # the base hostname & protocol for your site
-avatar: /logo.jpg
+avatar: /logo.png
 email: vuanhduy1809@gmail.com
 # twitter_username: jekyllrb
 github_username:  vuanhduy
@@ -28,4 +28,4 @@ plugins:
 # theme: minima
 remote_theme: ngzhio/jekyll-theme-hamilton
 
-logo: logo.jpg
+logo: logo.png
