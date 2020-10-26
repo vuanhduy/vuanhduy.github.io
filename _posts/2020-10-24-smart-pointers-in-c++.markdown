@@ -179,9 +179,9 @@ The compiler is given a lot of flexibility in terms of how it handles this call.
 `std::make_unique()` (resp. `std::make_shared()`) doesn’t suffer from this problem because the creation of the object T and the creation of the `std::unique_ptr` (resp. `std::shared_ptr`) happen inside the `std::make_unique()` (resp. `std::make_shared()`) function, where there’s no ambiguity about order of execution.
 
 ## The circular dependency issue
-A **Circular dependency** (also called a **circular reference**, **cyclical reference**,  or a **cycle**) is a series of references where each object references the next, and the last object references back to the first, causing a referential loop (see Example 10). Note that,
+A **Circular dependency** (also called a **circular reference**, **cyclical reference**,  or a **cycle**) is a series of references where each object references the next, and the last object references back to the first, causing a referential loop (see Example 12). Note that,
 - In the context of shared pointers, the references will be pointers.
-- This cyclical reference issue can even happen with a single object if it has a `std::shared_ptr` member referencing to the object itself (see Example 11)
+- This cyclical reference issue can even happen with a single object if it has a `std::shared_ptr` member referencing to the object itself (see Example 13)
 
 ```C++
 #include <iostream>
@@ -194,14 +194,14 @@ public:
 };
 
 int main(int argc, const char * argv[]) {
-    // ==================== Example XX ====================
+    // ==================== Example 12 ====================
     auto my_object1 = std::make_shared<MyClass>();
 	  auto my_object2 = std::make_shared<MyClass>();
 
     my_object1->m_ptr = my_object2;
 		my_object2->m_ptr = my_object1;
 
-    // ==================== Example XX ====================
+    // ==================== Example 13 ====================
     auto my_object3 = std::make_shared<MyClass>();
     my_object3->m_ptr = my_object3;
 
