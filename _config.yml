@@ -25,3 +25,5 @@ plugins:
 
 # theme: minima
 remote_theme: ngzhio/jekyll-theme-hamilton
+
+logo: logo.jpg
