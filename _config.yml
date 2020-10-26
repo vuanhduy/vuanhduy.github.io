@@ -1,11 +1,10 @@
 title: Anh-Duy Vu
-email: vuanhduy1809@gmail.com
-description: This is a personal blog of Anh-Duy Vu
-url: "https://vuanhduy.github.io" # the base hostname & protocol for your site
+description: Anh-Duy's blog
+url: https://vuanhduy.github.io
 author: Anh-Duy Vu
-avatar: /logo.png
+avatar: /avatar.png
 email: vuanhduy1809@gmail.com
-location: Onatrio, Canada
+location: Hamilton, ON, Canada
 
 plugins:
   - jekyll-feed
@@ -22,6 +21,8 @@ exclude:
   - scripts/
   - README.md
 
+permalink: /:year/:month/:day/:title.html
+
 defaults:
   - scope:
       path: ""      
@@ -29,7 +30,7 @@ defaults:
     values:
       layout: "post"
       author: "Anh-Duy Vu"
-      image: "logo.png"
+      image: "avatar.png"
       share: true
   - scope:
       path: ""      
@@ -37,8 +38,21 @@ defaults:
     values:
       layout: "page"
       author: "Anh-Duy Vu"
-      image: "logo.png"
+      image: "avatar.png"
 
+# Jekyll Remote Theme
+# ===================
 remote_theme: ngzhio/jekyll-theme-hamilton
 
+# Jekyll SEO Tag (Optional)
+# =========================
+logo: avatar.jpg
+social:
+  name: Anh-Duy Vu
+  links:
+    - https://github.com/vuanhduy
+lang: en
+
+# Jekyll Paginate
+# ===============
 paginate: 10
