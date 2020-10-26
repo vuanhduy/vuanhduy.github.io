@@ -20,5 +20,5 @@ github_username:  vuanhduy
 # Build settings
 markdown: kramdown
 
-# theme: jekyll-theme-cayman
-remote_theme: ngzhio/jekyll-theme-hamilton
+theme: minima
+# remote_theme: ngzhio/jekyll-theme-hamilton
