@@ -2,7 +2,8 @@
 layout: post
 title:  "C++ smart pointers"
 date:   2020-10-24 10:56:33 -0400
-categories: [C++, smart pointers]
+categories: [C++ programming language]
+tags: ["C++", smart pointers]
 toc: true
 ---
 
@@ -10,16 +11,14 @@ A **smart pointer** is a class that manages a dynamically allocated object,ensur
 
 C++11 standard library ships with 4 smart pointer classes: `std::auto_ptr` (which you shouldn’t use -- it’s being removed in C++17), `std::unique_ptr` `std::shared_ptr`, and `std::weak_ptr`.
 
-# Smart pointer classes
-
-## std::unique_ptr
+## Smart pointer classes
+### std::unique_ptr
 
 The `std::unique_ptr` should be used to manage a single dynamically-allocated object. That is, there must be only a single pointer pointing to the dynamically-allocated object. Internally, as the `std::unique_ptr` variable is allocated on the stack, it’s guaranteed to eventually go out of scope, and when it does, the system will delete the heap-allocated content that the variable is managing.
 
 The `std::unique_ptr` has an overloaded `*` and `->` operations that return the **reference** and **pointer** to the content being managed, respectively.
 
 Because the `std::unique_ptr` is designed with move semantics in mind, copy initialization and copy assignment are disabled. If you want to transfer the contents managed by `std::unique_ptr`, you must use move semantics (e.g., via `std::move`) (See Example 2.)
-
 `std::make_unique` is a templated function creating a new `std::unique_ptr` pointer to an object of the template type. The newly created object is initialized with the arguments passed into the function. Furthermore the `std::make_unique` can resolve an exception safety issue that can result from `C++` leaving the order of evaluation for function arguments unspecified (see [here](#markdown-header-the-exception-safety-issue) for the details).
 
 On returning a `std::unique_ptr` pointer from an function, if this value is not assigned to anything, the temporary return value will go out of scope and be cleaned up. If it is assigned, in C++14 or earlier, move semantics will be employed to transfer the temporary value from the return value to the object assigned to, and in C++17 or newer, the return will be elided. This makes returning a resource by `std::unique_ptr` much safer than returning raw pointers! (see Example 4.)
@@ -85,7 +84,7 @@ void pass_by_reference(MyClass *my_object) {
 }
 ```
 
-## std::shared_ptr
+### std::shared_ptr
 
 `std::shared_ptr` is a means to solve the case where you need multiple smart pointers co-owning a resource. Internally, `std::shared_ptr` keeps track of how many `std::shared_ptr` are sharing the resource. As long as at least one `std::shared_ptr` is pointing to the resource, the resource will not be deallocated, even if individual `std::shared_ptr` are destroyed. As soon as the last `std::shared_ptr` managing the resource goes out of scope (or is reassigned to point at something else), the resource will be deallocated (see Example 7.)
 
@@ -132,7 +131,7 @@ int main(int argc, const char * argv[]) {
 }
 ```
 
-## std::weak_ptr
+### std::weak_ptr
 
 `std::weak_ptr` is designed to solve the **circular dependency issue** (see [here](#markdown-header-the-circular-dependency-issue) for the details). A `std::weak_ptr` works as an observer, which can observe and access the same object as a `std::shared_ptr` (or other `std::weak_ptrs`) but is not considered an owner. Recall that when a `std::shared_ptr` goes out of scope,it only considers whether other `std::shared_ptr` are co-owning the object (`std::weak_ptr` does not count!)
 
@@ -169,9 +168,9 @@ int main(int argc, const char * argv[]) {
 }
 ```
 
-# Mics
+## Mics
 
-## The exception safety issue
+### The exception safety issue
 
 Consider an expression like this one:
 
@@ -182,7 +181,7 @@ The compiler is given a lot of flexibility in terms of how it handles this call.
 
 `std::make_unique()` (resp. `std::make_shared()`) doesn’t suffer from this problem because the creation of the object T and the creation of the `std::unique_ptr` (resp. `std::shared_ptr`) happen inside the `std::make_unique()` (resp. `std::make_shared()`) function, where there’s no ambiguity about order of execution.
 
-## The circular dependency issue
+### The circular dependency issue
 
 A **Circular dependency** (also called a **circular reference**, **cyclical reference**,  or a **cycle**) is a series of references where each object references the next, and the last object references back to the first, causing a referential loop (see Example 12). Note that,
 - In the context of shared pointers, the references will be pointers.
