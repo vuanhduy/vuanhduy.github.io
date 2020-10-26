@@ -11,6 +11,7 @@ A **smart pointer** is a class that manages a dynamically allocated object,ensur
 C++11 standard library ships with 4 smart pointer classes: `std::auto_ptr` (which you shouldn’t use -- it’s being removed in C++17), `std::unique_ptr` `std::shared_ptr`, and `std::weak_ptr`.
 
 # Smart pointer types
+
 ## std::unique_ptr
 
 The `std::unique_ptr` should be used to manage a single dynamically-allocated object. That is, there must be only a single pointer pointing to the dynamically-allocated object. Internally, as the `std::unique_ptr` variable is allocated on the stack, it’s guaranteed to eventually go out of scope, and when it does, the system will delete the heap-allocated content that the variable is managing.
@@ -169,7 +170,9 @@ int main(int argc, const char * argv[]) {
 ```
 
 # Mics
+
 ## The exception safety issue
+
 Consider an expression like this one:
 
 ```C++
@@ -180,6 +183,7 @@ The compiler is given a lot of flexibility in terms of how it handles this call.
 `std::make_unique()` (resp. `std::make_shared()`) doesn’t suffer from this problem because the creation of the object T and the creation of the `std::unique_ptr` (resp. `std::shared_ptr`) happen inside the `std::make_unique()` (resp. `std::make_shared()`) function, where there’s no ambiguity about order of execution.
 
 ## The circular dependency issue
+
 A **Circular dependency** (also called a **circular reference**, **cyclical reference**,  or a **cycle**) is a series of references where each object references the next, and the last object references back to the first, causing a referential loop (see Example 12). Note that,
 - In the context of shared pointers, the references will be pointers.
 - This cyclical reference issue can even happen with a single object if it has a `std::shared_ptr` member referencing to the object itself (see Example 13)
