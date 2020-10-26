@@ -3,6 +3,7 @@ layout: post
 title:  "C++ smart pointers"
 date:   2020-10-24 10:56:33 -0400
 categories: [C++, smart pointers]
+toc: true
 ---
 
 A **smart pointer** is a class that manages a dynamically allocated object,ensuring the dynamically allocated object is properly cleaned up at the appropriate time (usually when the smart pointer goes out of scope).
