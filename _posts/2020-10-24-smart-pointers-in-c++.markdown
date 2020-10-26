@@ -10,7 +10,7 @@ A **smart pointer** is a class that manages a dynamically allocated object,ensur
 
 C++11 standard library ships with 4 smart pointer classes: `std::auto_ptr` (which you shouldn’t use -- it’s being removed in C++17), `std::unique_ptr` `std::shared_ptr`, and `std::weak_ptr`.
 
-# Smart pointer types
+# Smart pointer classes
 
 ## std::unique_ptr
 
