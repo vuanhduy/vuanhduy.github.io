@@ -4,7 +4,6 @@ title:  "C++ smart pointers"
 date:   2020-10-24 10:56:33 -0400
 categories: [C++, smart pointers]
 ---
-# Introduction
 
 A **smart pointer** is a class that manages a dynamically allocated object,ensuring the dynamically allocated object is properly cleaned up at the appropriate time (usually when the smart pointer goes out of scope).
 
@@ -168,8 +167,8 @@ int main(int argc, const char * argv[]) {
 }
 ```
 
-## Mics
-### The exception safety issue
+# Mics
+## The exception safety issue
 Consider an expression like this one:
 
 ```C++
@@ -179,7 +178,7 @@ The compiler is given a lot of flexibility in terms of how it handles this call.
 
 `std::make_unique()` (resp. `std::make_shared()`) doesn’t suffer from this problem because the creation of the object T and the creation of the `std::unique_ptr` (resp. `std::shared_ptr`) happen inside the `std::make_unique()` (resp. `std::make_shared()`) function, where there’s no ambiguity about order of execution.
 
-### The circular dependency issue
+## The circular dependency issue
 A **Circular dependency** (also called a **circular reference**, **cyclical reference**,  or a **cycle**) is a series of references where each object references the next, and the last object references back to the first, causing a referential loop (see Example 10). Note that,
 - In the context of shared pointers, the references will be pointers.
 - This cyclical reference issue can even happen with a single object if it has a `std::shared_ptr` member referencing to the object itself (see Example 11)
