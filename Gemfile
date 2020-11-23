@@ -11,6 +11,7 @@ group :jekyll_plugins do
   gem "jemoji", "~> 0.11"
   gem "kramdown", ">= 2.3.0"
   gem "kramdown-parser-gfm", "~> 1.1"
+  gem "jekyll-postfiles"
 end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
