@@ -176,7 +176,7 @@ private:
 As you may notice, I also had some minor optimization by using bitwise operators instead of division or modulo.
 
 **Evaluation**
-![Time comparison](./images/soe_time_comparison.png)
+![Time comparison](https://github.com/vuanhduy/vuanhduy.github.io/blob/master/_posts/images/soe_time_comparison.png)
 
 ## External links:
 1. [Euler project](https://projecteuler.net/)
