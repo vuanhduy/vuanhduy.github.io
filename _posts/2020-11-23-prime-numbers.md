@@ -45,16 +45,14 @@ unique_ptr<bool[]> create_SoE_v1 (const size_t &n) {
 }
 ```
 
-Evaluations:
+As denoted in the following table, the algorithm can find about `455` million prime numbers between `2` and `10` billion in about 2 mins when running on my Dell Precision 5820 PC (Intel(R) Xeon(R) 3.20GHz CPU and 32GB of RAM). This is quite good. However, I got a memory error when setting `n` to 100 billion.
 
-| n               | # of prime numbers | Time (s)       |
-|-----------------|--------------------|----------------|
-| 100,000         |       9,592        |         6.89   |
-| 1,000,000       |      78,498        |        72.65   |
-| 10,000,000      |     664,579        |       769.09   |
-| 100,000,000     |   5,761,455        |     8,054.80   |
-| 1,000,000,000   |  50,847,534        |    86,573.46   |
-| 10,000,000,000  | 455,052,511        | 1,044,351.54   |
+| n               | # of prime numbers | Time (s)        |
+|-----------------|--------------------|-----------------|
+| 10,000,000      |     664,579        |   0.82          |
+| 100,000,000     |   5,761,455        |   8.59          |
+| 1,000,000,000   |  50,847,534        |  93.31          |
+| 10,000,000,000  | 455,052,511        | 130.19          |
 | 100,000,000,000 | `<memory error>`   | `<memory error>`|
 
 
@@ -62,7 +60,7 @@ Evaluations:
 
 Observe that:
 - If `n` is not a prime number, I can always find a pair of integers `p` and `q` such that both `p` and `q` are less than `n`, and `p` is a prime number.
-- If `n` is a prime number, the algorithm ensures that all non-prime numbers smaller that `n` are marked.
+- If `n` is a prime number, the algorithm ensures that all nonsize_t-prime numbers smaller that `n` are marked.
 Thus, instead of checking all the way up to `n`, I need to check only up to the square root of `n`.
 
 ```C++
@@ -86,6 +84,11 @@ unique_ptr<bool[]> create_SoE_v2(const size_t &n) {
     return move(primes);
 }
 ```
+
+This version is approximately two times faster than the first one, as denoted in the below graph. However, it still produces the memory error when `n` is `100` billion.
+
+![Time comparison 1](https://github.com/vuanhduy/vuanhduy.github.io/blob/master/_posts/images/soe_time_comparison_1.png)
+
 
 **Version 3**
 
@@ -175,9 +178,12 @@ private:
 ```
 As you may notice, I also had some minor optimization by using bitwise operators instead of division or modulo.
 
-**Evaluation**
-![Time comparison](https://github.com/vuanhduy/vuanhduy.github.io/blob/master/_posts/images/soe_time_comparison.png)
+The time comparison between the three versions is shown in the following figure, and the last version, of course,  outperforms the other two. Additionally, this is also the only one that can find prime numbers between 2 and 400 billion.
+
+![Time comparison](https://github.com/vuanhduy/vuanhduy.github.io/blob/master/_posts/images/soe_time_comparison_2.png)
 
 ## External links:
 1. [Euler project](https://projecteuler.net/)
-2. [Wikipedia page of Sieve of Eratosthenes](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes)
+1. [Wikipedia page of sieve of Eratosthenes](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes)
+1. [Wikipedia page of sieve of Sundarm](https://en.wikipedia.org/wiki/Sieve_of_Sundaram)
+1. [Wikipedia page of sieve of Atkin](https://en.wikipedia.org/wiki/Sieve_of_Atkin)
