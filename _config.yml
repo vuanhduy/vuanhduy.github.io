@@ -12,6 +12,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-remote-theme
   - jekyll-paginate
+  - jekyll-spaceship
   - jemoji
 
 include:
