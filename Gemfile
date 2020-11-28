@@ -8,7 +8,7 @@ group :jekyll_plugins do
   gem "jekyll-sitemap", "~> 1.4"
   gem "jekyll-remote-theme", "~> 0.4"
   gem "jekyll-paginate", "~> 1.1"
-  # gem "jekyll-spaceship"
+  gem "jekyll-spaceship"
   gem "jemoji", "~> 0.11"
   gem "kramdown", ">= 2.3.0"
   gem "kramdown-parser-gfm", "~> 1.1"
