@@ -10,6 +10,7 @@ toc: true
 This post is motivated by [the Euler project's third problem](https://projecteuler.net/problem=3), asking to find the largest prime factor of the number `n=600,851,475,143`. In my humble opinion, the most challenging issue of the problem is how to efficiently determine whether a number is a prime number, and the best candidate is [the sieve of Eratosthenes algorithm](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes). In other words, my strategy is to generate all prime numbers up to the given `n` to ensure a fixed time (i.e., `O(1)`) for prime-checking. This post mainly focuses only on the sieve of Eratosthenes algorithm, C++ implementations, and some optimizations so that I can list all prime numbers up to the given `n`.
 
 ## The sieve of Eratosthenes
+
 The sieve of Eratosthenes is an ancient algorithm to find all the prime numbers less than or equal to a given integer `n`. The detail of the algorithms is as follows:
 
 1. Create an array of consecutive integers from `2` to `n`.
@@ -52,7 +53,7 @@ As denoted in the following table, the algorithm can find about `455` million pr
   <caption style="caption-side:bottom">Evaluation of create_SoE_v1 </caption>
   <tr>
     <th>n</th>
-    <th>\# of prime numbers</th>
+    <th># of prime numbers</th>
     <th>Time (s)</th>
   </tr>
   <tr>
@@ -112,7 +113,10 @@ unique_ptr<bool[]> create_SoE_v2(const size_t &n) {
 
 This version is approximately one third faster than the first one, as denoted in Figure 1. However, it still produces the memory error when `n` is `100` billion.
 
-![Figure 1: Time comparison 1](https://github.com/vuanhduy/vuanhduy.github.io/blob/master/_posts/images/soe_time_comparison_1.png)
+<figure>
+  <figcaption>Figure 1: Time comparison of version 1 and 2.</figcaption>
+  <img src="/assets/images/soe_time_comparison_1.png"/>
+</figure>
 
 
 **Version 3**
@@ -162,22 +166,26 @@ SoE(const size_t &n): m_upper_bound(n){
     }
 };
 ```
+
 As you may notice, I also had some minor optimization by using bitwise operators instead of division or modulo.
 
-The time comparison between the three versions is shown in the following figure, and the last version, of course,  outperforms the other two. Additionally, this is also the only one that can find all prime numbers between 2 and 200 billion, which is still quite far from my goal.
+The time comparison between the three versions is shown in Figure 2, and the last version, of course,  outperforms the other two. Additionally, this is also the only one that can find all prime numbers between 2 and 200 billion, which is still quite far from my goal.
 
-![Figure 2: Time comparison 2](https://github.com/vuanhduy/vuanhduy.github.io/blob/master/_posts/images/soe_time_comparison_2.png)
+<figure>
+  <figcaption>Figure 2: Time comparison of 3 versions.</figcaption>
+  <img src="/assets/images/soe_time_comparison_2.png"/>
+</figure>
 
 At this point, I am thinking of parallelizing the algorithm. That is, I will divide the range into smaller segments and process them in parallel. However, the latter segments likely have less prime numbers than the former ones making threads processing latter segments have to invoke the `mark` lambda more often than those of former segments. In other words, the challenge of parallelizing the algorithm is how to balance the workload between threads. Thus, I would like to have these kinds of optimization in a separate post.
 
-
 ## Conclusion
 
-This post presented the accent algorithm named Sieve of Eratosthenes and 3 different implementations in C++, optimizing running time and storing space. Although the original goal is to find all prime numbers between `2` and `600,851,475,143` to solve the Euler project's third problem, the proposed implementation can only do `[2, 200,000,000,000]`. Another possible optimization is to divide the range into smaller segments and process them in parallel, which I will present in another post soon.
+This post presented the accent algorithm named Sieve of Eratosthenes and 3 different implementations in C++, optimizing running time and storing space. Although the original goal is to find all prime numbers between `2` and `600,851,475,143` to solve the Euler project's third problem, the proposed implementation can only do `[2, 250,000,000,000]` (taking about 5 hours). Another possible optimization is to divide the range into smaller segments and process them in parallel, which I will present in another post soon.
 
 Finally, the source code of the implementations can be found [here.](https://github.com/vuanhduy/PrimeNumbersAndSieves)
 
 ## External links:
+
 1. [Euler project](https://projecteuler.net/)
 1. [Wikipedia page of sieve of Eratosthenes](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes)
 1. [Wikipedia page of sieve of Sundarm](https://en.wikipedia.org/wiki/Sieve_of_Sundaram)
