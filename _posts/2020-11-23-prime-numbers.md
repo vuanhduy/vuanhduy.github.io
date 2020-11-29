@@ -7,7 +7,19 @@ tags: ["C++", prime number, sieve of Eratosthenese]
 toc: true
 ---
 
-This post is motivated by [the Euler project's third problem](https://projecteuler.net/problem=3), asking to find the largest prime factor of the number `n=600,851,475,143`. In my humble opinion, the most challenging issue of the problem is how to efficiently determine whether a number is a prime number, and the best candidate is [the sieve of Eratosthenes algorithm](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes). In other words, my strategy is to generate all prime numbers up to the given `n` to ensure a fixed time (i.e., `O(1)`) for prime-checking. This post mainly focuses only on the sieve of Eratosthenes algorithm, C++ implementations, and some optimizations so that I can list all prime numbers up to the given `n`.
+This post is motivated by [the Euler project's third problem](https://projecteuler.net/problem=3), finding the largest prime factor of the number `n=600,851,475,143`. In my humble opinion, the most challenging issue of the problem is how to efficiently determine whether a number is prime, and the best candidate is [the sieve of Eratosthenes algorithm](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes). In other words, my strategy is:
+
+1. Generate all prime numbers up to the given `n` to ensure a fixed time (i.e., `O(1)`) for prime-checking.
+2. If `n` is a prime number, return `n`.
+2. Otherwise, for each prime number `p` (found in step 1):
+    - If `n` is divisible by `p`, let `n = p * n'` and set `ans = p`
+        - If `n'` is also a prime numbers, the return `max(ans, n')`.
+        - Otherwise, set `n = n'` and continue the loop.
+    - Otherwise, continue the loop.
+3. return `ans`.
+
+
+This post focuses on the frist step (i.e, generating prime numbers). Thus, I present the sieve of Eratosthenes algorithm and C++ implementations with different optimizations.
 
 ## The sieve of Eratosthenes
 
@@ -17,11 +29,11 @@ The sieve of Eratosthenes is an ancient algorithm to find all the prime numbers 
 1. Take the first element of the array (i.e., `2`) and mark all other elements which are multiples of the element (except itself) as `nonprime`.
 1. Repeat step 2 for the next element that has not been marked until reaching `n`.
 
-## Implementations
+## C++ implementations
 
 **Version 1**
 
-In this version, I simply implement the algorithm with a minor optimization. Instead of using an array of consecutive integers, I use an array of boolean variables to indicate whether a number is prime. That is, if `primes[i] == true` , then `i` is a prime number. The detail of of the implementation is as follows:
+In this version, I simply implement the algorithm with a minor optimization. Instead of using an array of consecutive integers, I use an array of boolean variables (named `primes`) to indicate whether a number is prime. That is, if `primes[i] == true` , then `i` is a prime number. The detail of of the implementation is as follows:
 
 ```C++
 #include <algorithm>
@@ -35,7 +47,7 @@ unique_ptr<bool[]> create_SoE_v1 (const size_t &n) {
     primes[1] = false;
 
     // Mark non-prime numbers
-    for(size_t i = 3; i <= n; i++) {
+    for(size_t i = 2; i <= n; i++) {
         if(primes[i] == true) {
             for(size_t j = 2*i; j <= n; j += i) {
                 primes[j] = false;
@@ -47,7 +59,7 @@ unique_ptr<bool[]> create_SoE_v1 (const size_t &n) {
 }
 ```
 
-As denoted in the following table, the algorithm can find about `455` million prime numbers between `2` and `10` billion in about 2 mins when running on my Dell Precision 5820 PC (Intel(R) Xeon(R) 3.20GHz CPU and 32GB of RAM). This is quite good. However, I got a memory error when setting `n` to 100 billion.
+As denoted in the following table, the algorithm can find about `455` million prime numbers between `2` and `10` billion in about 2 mins when running on my Dell Precision 5820 PC (Intel(R) Xeon(R) 3.20GHz CPU and 32GB of RAM). Although this is quite good, it is still quite far from my goal, as I also got a memory error when `n` is 100 billion.
 
 <table>
   <caption style="caption-side:bottom">Evaluation of create_SoE_v1 </caption>
@@ -85,9 +97,11 @@ As denoted in the following table, the algorithm can find about `455` million pr
 **Version 2**
 
 Observe that:
+
 - If `n` is not a prime number, I can always find a pair of integers `p` and `q` such that both `p` and `q` are less than `n`, and `p` is a prime number.
 - If `n` is a prime number, the algorithm ensures that all nonsize_t-prime numbers smaller that `n` are marked.
-Thus, instead of checking all the way up to `n`, I need to check only up to the square root of `n`.
+
+Thus, instead of checking all the way up to `n`, I need to check up to only the square root of `n`. Here is the new implementation:
 
 ```C++
 unique_ptr<bool[]> create_SoE_v2(const size_t &n) {
@@ -99,7 +113,7 @@ unique_ptr<bool[]> create_SoE_v2(const size_t &n) {
 
     // Mark non-prime numbers
     size_t sqrt_n = static_cast<size_t>(sqrt(n));
-    for (size_t i = 3; i <= sqrt_n; i += 2) {
+    for (size_t i = 2; i <= sqrt_n; i += 2) {
         if(primes[i] == true) {
             for(size_t j = 2*i; j <= n; j += i) {
                 primes[j] = false;
@@ -167,9 +181,9 @@ SoE(const size_t &n): m_upper_bound(n){
 };
 ```
 
-As you may notice, I also had some minor optimization by using bitwise operators instead of division or modulo.
+As you may notice, I also had some minor optimization by using bitwise operators instead of division and modulo.
 
-The time comparison between the three versions is shown in Figure 2, and the last version, of course,  outperforms the other two. Additionally, this is also the only one that can find all prime numbers between 2 and 200 billion, which is still quite far from my goal.
+The time comparison between the three versions is shown in Figure 2, and the last version, of course,  outperforms the other two. Additionally, this is also the only one that can find all prime numbers between 2 and 250 billion (taking about 5 hours), which is still quite far from my goal.
 
 <figure>
   <figcaption>Figure 2: Time comparison of 3 versions.</figcaption>
@@ -180,7 +194,7 @@ At this point, I am thinking of parallelizing the algorithm. That is, I will div
 
 ## Conclusion
 
-This post presented the accent algorithm named Sieve of Eratosthenes and 3 different implementations in C++, optimizing running time and storing space. Although the original goal is to find all prime numbers between `2` and `600,851,475,143` to solve the Euler project's third problem, the proposed implementation can only do `[2, 250,000,000,000]` (taking about 5 hours). Another possible optimization is to divide the range into smaller segments and process them in parallel, which I will present in another post soon.
+This post presented the accent algorithm named Sieve of Eratosthenes and 3 different implementations in C++, optimizing running time and storing space. Although the original goal is to find all prime numbers between `2` and `600,851,475,143` to solve the Euler project's third problem, the proposed implementation can only do `[2, 250,000,000,000]`. Another possible optimization is to divide the range into smaller segments and process them in parallel, which I will present in another post soon.
 
 Finally, the source code of the implementations can be found [here.](https://github.com/vuanhduy/PrimeNumbersAndSieves)
 
