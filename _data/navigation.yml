@@ -1,2 +1,11 @@
+- title: Blog
+  url: /
+  
+- title: Pulications
+  url: /publications/
+  
+- title: CV
+  url: /assets/pdf/Resume.pdf
+  
 - title: About
   url: /about/
