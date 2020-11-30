@@ -16,5 +16,5 @@ This is a running list of things that I am doing, have done or eventually do :)
 - [ ] Revise traveling saleman problem (TSP) and vehicle routing problem (VRP).
 - [ ] Reading a book a month:
 	- [ ] C++ Concurrency in Action by Anthony Williams (December 2020.)
-- [x] Write a post on the sieve of Eratosthenes algorith.
-- [ ] Parallel the sieve of Eratosthenes algorith.
+- [x] Write a post on the sieve of Eratosthenes algorithm.
+- [ ] Parallel the sieve of Eratosthenes algorithm.
