@@ -1,6 +1,9 @@
 - title: Blog
   url: /
   
+- title: Todo list
+  url: /tasklist
+  
 - title: Pulications
   url: /publications/
   
