@@ -2,7 +2,7 @@
 layout: post
 title:  "Playing with prime numbers and sieve of Eratosthenes"
 date:   2020-11-23 10:56:33 -0400
-categories: [C++ programming language, math]
+categories: [C++ programming language, Math]
 tags: ["C++", prime number, sieve of Eratosthenese]
 toc: true
 ---
