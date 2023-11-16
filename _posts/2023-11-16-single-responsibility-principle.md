@@ -3,7 +3,7 @@ layout: post
 title:"Design pattern: Single Responsibility Principle"
 date: 2023-11-16 10:56:33 -0400
 categories: [C++ programming language, Design Pattern]
-tags: ["`C++`, Design Pattern, SOLID"]
+tags: ["`C++`", ", Design Pattern", "SOLID"]
 toc: true
 ---
 
