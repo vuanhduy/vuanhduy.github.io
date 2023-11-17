@@ -68,10 +68,10 @@ public:
 Althought this seems convenient, it violates the Single Responsibility Principle: the `Rectangle` class is now responsible not only for managing rectangle attributes but also for display operations. This violation can lead to maintenance challenges as the codebase expands.
 
 
-To adhere to SRP, we must separate concerns. In this case, we introduce a `Screen` class responsible for display operations:
+To adhere to SRP, we must separate concerns. In this case, we introduce a `Canvas` class responsible for drawing operations:
 
 ```C++
-class Screen {
+class Canvas {
 public:
     static void draw(const Rectangle& rectangle) {
         // Draw the rectangle ...
@@ -81,7 +81,7 @@ public:
 };
 ```
 
-This separation of concerns enhances maintainability. For example, if there's a decision to support different types of screen, we only need to modify the `Screen` class.
+This separation of concerns enhances maintainability. For example, if there's a decision to support different types of screen, we only need to modify the `Canvas` class.
 
 
 ## Conclusion
