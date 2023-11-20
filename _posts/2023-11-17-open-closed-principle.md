@@ -47,7 +47,7 @@ public:
 ```
 
 
-The Open-Closed Principle provides a more elegant solution through abstract and derived classes:
+The Open-Closed Principle provides a more elegant solution through abstract and concrete classes:
    - `Geometry` is an abstract class defining common properties and calculations for geometric shape, such as calculating area.
    - `Rectangle`, `Circle`, and `Triangle` are derived from the `Geometry` class, managing shapes' specific properties, and calculations.
    - `Canvas` is an abstract class defining common methods for drawing geometric shapes.
