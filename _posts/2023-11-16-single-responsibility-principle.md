@@ -49,7 +49,7 @@ private:
 ```
 
 
-While this implementation appears sound, issues arise when the need for display functionality arises - drawing a rectangel to a screen. A common mistake is to extend the `Rectangle` class with display-related methods:
+While this implementation appears sound, issues arise when the need for display functionality arises - rendering a rectangel to a screen. A common mistake is to extend the `Rectangle` class with display-related methods:
 
 ```C++
 class Rectangle {
