@@ -57,7 +57,7 @@ The Open-Closed Principle provides a more elegant solution through abstract and 
 ```C++
 class Geometry {
 public:
-    virtual calculateArea() const = 0;
+    virtual int calculateArea() const = 0;
     // Additional pure virtual methods for managing calculations ...
 }
 
