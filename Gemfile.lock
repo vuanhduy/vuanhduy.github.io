@@ -5,6 +5,7 @@ GEM
       base64
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
+<<<<<<< HEAD
       connection_pool (>= 2.2.5)
       drb
       i18n (>= 1.6, < 2)
@@ -15,11 +16,21 @@ GEM
       public_suffix (>= 2.0.2, < 6.0)
     base64 (0.2.0)
     bigdecimal (3.1.4)
+=======
+      i18n (>= 0.7, < 2)
+      minitest (~> 5.1)
+      tzinfo (~> 1.1)
+      zeitwerk (~> 2.2, >= 2.2.2)
+    addressable (2.8.5)
+      public_suffix (>= 2.0.2, < 6.0)
+    base64 (0.2.0)
+>>>>>>> update all dependencies
     coffee-script (2.4.1)
       coffee-script-source
       execjs
     coffee-script-source (1.11.1)
     colorator (1.1.0)
+<<<<<<< HEAD
     commonmarker (0.23.10)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
@@ -27,6 +38,13 @@ GEM
       simpleidn (~> 0.2.1)
     drb (2.2.0)
       ruby2_keywords
+=======
+    commonmarker (0.17.13)
+      ruby-enum (~> 0.5)
+    concurrent-ruby (1.2.2)
+    dnsruby (1.70.0)
+      simpleidn (~> 0.2.1)
+>>>>>>> update all dependencies
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0)
@@ -97,7 +115,11 @@ GEM
       activesupport (>= 2)
       nokogiri (>= 1.4)
     http_parser.rb (0.8.0)
+<<<<<<< HEAD
     i18n (1.14.1)
+=======
+    i18n (0.9.5)
+>>>>>>> update all dependencies
       concurrent-ruby (~> 1.0)
     jekyll (3.9.3)
       addressable (~> 2.4)
@@ -216,7 +238,11 @@ GEM
       rexml
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
+<<<<<<< HEAD
     liquid (4.0.4)
+=======
+    liquid (4.0.3)
+>>>>>>> update all dependencies
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -226,7 +252,10 @@ GEM
       jekyll-feed (~> 0.9)
       jekyll-seo-tag (~> 2.1)
     minitest (5.20.0)
+<<<<<<< HEAD
     mutex_m (0.2.0)
+=======
+>>>>>>> update all dependencies
     nokogiri (1.15.5-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.15.5-x86_64-linux)
@@ -236,7 +265,11 @@ GEM
       sawyer (~> 0.9)
     pathutil (0.16.2)
       forwardable-extended (~> 2.6)
+<<<<<<< HEAD
     public_suffix (4.0.7)
+=======
+    public_suffix (3.1.1)
+>>>>>>> update all dependencies
     racc (1.7.3)
     rainbow (3.1.1)
     rb-fsevent (0.11.2)
@@ -244,6 +277,11 @@ GEM
       ffi (~> 1.0)
     rexml (3.2.6)
     rouge (3.26.0)
+<<<<<<< HEAD
+=======
+    ruby-enum (0.9.0)
+      i18n
+>>>>>>> update all dependencies
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
     safe_yaml (1.0.5)
@@ -259,15 +297,27 @@ GEM
       unf (~> 0.1.4)
     terminal-table (1.8.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
+<<<<<<< HEAD
     typhoeus (1.4.1)
       ethon (>= 0.9.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+=======
+    thread_safe (0.3.6)
+    typhoeus (1.4.1)
+      ethon (>= 0.9.0)
+    tzinfo (1.2.11)
+      thread_safe (~> 0.1)
+>>>>>>> update all dependencies
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.9.1)
     unicode-display_width (1.8.0)
     webrick (1.8.1)
+<<<<<<< HEAD
+=======
+    zeitwerk (2.6.12)
+>>>>>>> update all dependencies
 
 PLATFORMS
   x86_64-darwin-20
